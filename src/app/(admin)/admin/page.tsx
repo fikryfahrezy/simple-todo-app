@@ -1,3 +1,6 @@
+"use client";
+
+import { logoutAction } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -10,7 +13,7 @@ import {
 export default function AdminPage() {
   return (
     <>
-      <Button>Button</Button>
+      <Button onClick={logoutAction}>Logout</Button>
       <Select>
         <SelectTrigger className='w-[180px]'>
           <SelectValue placeholder='Theme' />
