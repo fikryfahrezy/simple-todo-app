@@ -65,7 +65,7 @@ export async function registerAction(
 }
 
 export async function loginAction(
-  _: RegisterFormState,
+  _: LoginFormState,
   formData: FormData,
 ): Promise<LoginFormState> {
   const loginForm = {
