@@ -1,0 +1,3 @@
+/* biome-ignore lint/correctness/noUnknownMediaFeatureName: this is fine in Tailwind case */
+@import "tailwindcss" prefix(tw);
+@import "tw-animate-css";
