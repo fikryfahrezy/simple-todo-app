@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Home() {
+export default function UserPage() {
   return (
     <>
       <Button>Button</Button>
