@@ -12,10 +12,10 @@ import type {
   NodewaveServiceMarkTodoResponse,
   NodewaveServiceRegisterRequest,
   NodewaveServiceResponseFail,
+  NodewaveServiceResult,
   NodewaveServiceVerifyTokenRequest,
   NodewaveServiceVerifyTokenResponse,
 } from "@/services/nodewave-service.types";
-import type { Either } from "@/types/utility";
 
 const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_API_URL;
 
@@ -27,82 +27,127 @@ const axiosInstance = axios.create({
 export async function register({
   data,
 }: NodewaveServiceRegisterRequest): Promise<
-  Either<NodewaveServiceAuthzResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceAuthzResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.post<
     NodewaveServiceAuthzResponse | NodewaveServiceResponseFail
   >("/register", data);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function login({
   data,
 }: NodewaveServiceLoginRequest): Promise<
-  Either<NodewaveServiceAuthzResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceAuthzResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.post<
     NodewaveServiceAuthzResponse | NodewaveServiceResponseFail
   >("/login", data);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function verifyToken({
   data,
 }: NodewaveServiceVerifyTokenRequest): Promise<
-  Either<NodewaveServiceVerifyTokenResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceVerifyTokenResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.post<
     NodewaveServiceVerifyTokenResponse | NodewaveServiceResponseFail
   >("/verify-token", data);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function createNewTodo({
   data,
 }: NodewaveServiceCreateTodoRequest): Promise<
-  Either<NodewaveServiceCreateTodoResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceCreateTodoResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.post<
     NodewaveServiceCreateTodoResponse | NodewaveServiceResponseFail
   >("/todos", data);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function markTodo({
   todoId,
   data,
 }: NodewaveServiceMarkTodoRequest): Promise<
-  Either<NodewaveServiceMarkTodoResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceMarkTodoResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.put<
     NodewaveServiceMarkTodoResponse | NodewaveServiceResponseFail
   >(`/todos/${todoId}/mark`, data);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function getAllTodos({
@@ -110,7 +155,10 @@ export async function getAllTodos({
   rows = 10,
   filters = undefined,
 }: NodewaveServiceAllTodosRequest): Promise<
-  Either<NodewaveServiceAllTodosResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceAllTodosResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.get<
     NodewaveServiceAllTodosResponse | NodewaveServiceResponseFail
@@ -123,24 +171,39 @@ export async function getAllTodos({
   });
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }
 
 export async function deleteTodoById({
   todoId,
 }: NodewaveServiceDeleteTodoRequest): Promise<
-  Either<NodewaveServiceDeleteTodoResponse, NodewaveServiceResponseFail>
+  NodewaveServiceResult<
+    NodewaveServiceDeleteTodoResponse,
+    NodewaveServiceResponseFail
+  >
 > {
   const res = await axiosInstance.delete<
     NodewaveServiceDeleteTodoResponse | NodewaveServiceResponseFail
   >(`/todos/${todoId}`);
 
   if (!res.data.content) {
-    return [null, res.data];
+    return {
+      success: false,
+      response: res.data,
+    };
   }
 
-  return [res.data, null];
+  return {
+    success: true,
+    response: res.data,
+  };
 }

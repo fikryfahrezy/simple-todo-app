@@ -4,6 +4,16 @@ export type NodewaveServiceResponse<TContent> = {
   errors: string[];
 };
 
+export type NodewaveServiceResult<TResponseSuccess, TResponseError> =
+  | {
+      success: true;
+      response: TResponseSuccess;
+    }
+  | {
+      success: false;
+      response: TResponseError;
+    };
+
 export type NodewaveServiceResponseFail = NodewaveServiceResponse<null>;
 
 export type NodewaveServiceRegisterBody = {
@@ -18,7 +28,6 @@ export type NodewaveServiceRegisterRequest = {
 
 export type NodewaveServiceLoginBody = {
   email: string;
-  fullName: string;
   password: string;
 };
 
