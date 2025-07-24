@@ -22,6 +22,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_SERVICE_API_URL;
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 1000,
+  // Never throw
+  validateStatus: () => true,
 });
 
 export async function register({
