@@ -17,7 +17,7 @@ import type {
   NodewaveServiceVerifyTokenResponse,
 } from "@/services/nodewave-service.types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_SERVICE_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
