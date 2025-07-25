@@ -112,7 +112,7 @@ export default function LoginPage() {
               <Checkbox
                 id='rememberMe'
                 name='rememberMe'
-                className='tw:data-[state=checked]:bg-ring'
+                className='tw:[--bg:var(--ring)]'
                 key={state?.values?.rememberMe ? "checked" : "unchecked"}
                 defaultChecked={state?.values?.rememberMe}
               >
