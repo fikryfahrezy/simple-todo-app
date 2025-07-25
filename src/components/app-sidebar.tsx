@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import { HouseIcon } from "./icons";
 
+// Note: Hard code the menus just for this simple use case
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible='icon' {...props}>
