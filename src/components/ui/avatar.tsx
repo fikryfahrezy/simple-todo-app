@@ -12,7 +12,7 @@ export function Avatar({
     <AvatarPrimitive.Root
       data-slot='avatar'
       className={cn(
-        "tw:relative tw:flex tw:size-8 tw:shrink-0 tw:overflow-hidden tw:rounded-full",
+        "tw:relative tw:flex tw:size-8 tw:shrink-0 tw:rounded-full",
         className,
       )}
       {...props}
@@ -46,5 +46,13 @@ export function AvatarFallback({
       )}
       {...props}
     />
+  );
+}
+
+export function AvatarOnline() {
+  return (
+    <span className='tw:absolute tw:flex tw:size-4 tw:items-center tw:justify-center tw:-right-1 tw:-bottom-1 tw:rounded-full tw:bg-background'>
+      <span className='tw:size-2 tw:bg-[#72E128] tw:rounded-full'></span>
+    </span>
   );
 }

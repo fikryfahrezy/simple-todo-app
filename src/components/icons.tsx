@@ -270,3 +270,26 @@ export function XCircleIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function StarIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='20'
+      height='19'
+      viewBox='0 0 20 19'
+      fill='currentColor'
+      stroke='currentColor'
+      strokeWidth='0.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      {...props}
+    >
+      <title>Star Icon</title>
+      <path
+        d='M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.63L10 0L7.19 6.63L0 7.24L5.46 11.97L3.82 19L10 15.27Z'
+        fillOpacity='0.54'
+      />
+    </svg>
+  );
+}
