@@ -69,6 +69,7 @@ export type NodewaveServiceCreateTodoBody = {
 };
 
 export type NodewaveServiceCreateTodoRequest = {
+  token: string;
   data: NodewaveServiceCreateTodoBody;
 };
 
@@ -89,6 +90,7 @@ export type NodewaveServiceMarkTodoBody = {
 };
 
 export type NodewaveServiceMarkTodoRequest = {
+  token: string;
   todoId: string;
   data: NodewaveServiceMarkTodoBody;
 };
@@ -102,16 +104,22 @@ export type NodewaveServiceAllTodosResponseBody = {
   totalPage: number;
 };
 
-export type NodewaveServiceAllTodosRequest = {
+export type NodewaveServiceAllTodosParams = {
   page?: number;
   rows?: number;
-  filters?: string;
+  filters?: Record<string, never>;
+};
+
+export type NodewaveServiceAllTodosRequest = {
+  token: string;
+  params: NodewaveServiceAllTodosParams;
 };
 
 export type NodewaveServiceAllTodosResponse =
   NodewaveServiceResponse<NodewaveServiceAllTodosResponseBody>;
 
 export type NodewaveServiceDeleteTodoRequest = {
+  token: string;
   todoId: string;
 };
 

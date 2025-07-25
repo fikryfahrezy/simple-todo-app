@@ -19,6 +19,15 @@ import type {
 
 const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_SERVICE_API_URL;
 
+export class RequestError extends Error {
+  errors: string[];
+  constructor(message: string, errors: string[]) {
+    super(message);
+    this.name = "Request Error";
+    this.errors = errors;
+  }
+}
+
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   // Never throw
@@ -102,6 +111,7 @@ export async function verifyToken({
 
 export async function createNewTodo({
   data,
+  token,
 }: NodewaveServiceCreateTodoRequest): Promise<
   NodewaveServiceResult<
     NodewaveServiceCreateTodoResponse,
@@ -110,7 +120,11 @@ export async function createNewTodo({
 > {
   const res = await axiosInstance.post<
     NodewaveServiceCreateTodoResponse | NodewaveServiceResponseFail
-  >("/todos", data);
+  >("/todos", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!res.data.content) {
     return {
@@ -128,6 +142,7 @@ export async function createNewTodo({
 export async function markTodo({
   todoId,
   data,
+  token,
 }: NodewaveServiceMarkTodoRequest): Promise<
   NodewaveServiceResult<
     NodewaveServiceMarkTodoResponse,
@@ -136,7 +151,11 @@ export async function markTodo({
 > {
   const res = await axiosInstance.put<
     NodewaveServiceMarkTodoResponse | NodewaveServiceResponseFail
-  >(`/todos/${todoId}/mark`, data);
+  >(`/todos/${todoId}/mark`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!res.data.content) {
     return {
@@ -152,15 +171,16 @@ export async function markTodo({
 }
 
 export async function getAllTodos({
-  page = 1,
-  rows = 10,
-  filters = undefined,
+  params,
+  token,
 }: NodewaveServiceAllTodosRequest): Promise<
   NodewaveServiceResult<
     NodewaveServiceAllTodosResponse,
     NodewaveServiceResponseFail
   >
 > {
+  const { page = 1, rows = 10, filters = undefined } = params;
+
   const res = await axiosInstance.get<
     NodewaveServiceAllTodosResponse | NodewaveServiceResponseFail
   >("/todos", {
@@ -168,6 +188,9 @@ export async function getAllTodos({
       page,
       rows,
       filters: JSON.stringify(filters),
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -186,6 +209,7 @@ export async function getAllTodos({
 
 export async function deleteTodoById({
   todoId,
+  token,
 }: NodewaveServiceDeleteTodoRequest): Promise<
   NodewaveServiceResult<
     NodewaveServiceDeleteTodoResponse,
@@ -194,7 +218,11 @@ export async function deleteTodoById({
 > {
   const res = await axiosInstance.delete<
     NodewaveServiceDeleteTodoResponse | NodewaveServiceResponseFail
-  >(`/todos/${todoId}`);
+  >(`/todos/${todoId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!res.data.content) {
     return {
