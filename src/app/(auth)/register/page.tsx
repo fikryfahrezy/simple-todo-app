@@ -179,7 +179,7 @@ export default function RegisterPage() {
                 <SelectRoot
                   placeholder={
                     <SelectFloatingLabel htmlFor='country'>
-                      Country
+                      Your Country
                     </SelectFloatingLabel>
                   }
                   endIcon={
