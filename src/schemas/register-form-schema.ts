@@ -24,6 +24,7 @@ export type RegisterFormValues = z.infer<typeof RegisterFormSchema>;
 
 export type RegisterFormState =
   | {
+      success: boolean;
       values?: RegisterFormValues;
       message?: string;
       errors?: string[];

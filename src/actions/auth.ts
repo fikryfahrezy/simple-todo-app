@@ -43,6 +43,7 @@ export async function registerAction(
 
   if (!validatedRegisterForm.success) {
     return {
+      success: false,
       values: registerForm,
       fieldErrors: z.flattenError(validatedRegisterForm.error).fieldErrors,
     };
@@ -58,21 +59,24 @@ export async function registerAction(
 
   if (!registerResult.success) {
     return {
+      success: false,
       values: registerForm,
       message: registerResult.response.message,
       errors: registerResult.response.errors,
     };
   }
 
-  await createSession(registerResult.response.content);
   const verifyTokenResult = await verifyToken({
     data: {
       token: registerResult.response.content.token,
     },
   });
 
+  await createSession(registerResult.response.content);
+
   if (!verifyTokenResult.success) {
     return {
+      success: false,
       values: registerForm,
       message: verifyTokenResult.response.message,
       errors: verifyTokenResult.response.errors,
