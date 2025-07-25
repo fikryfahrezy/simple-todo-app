@@ -33,7 +33,7 @@ export async function deleteSession() {
 export const getSession = cache(async () => {
   const cookieStore = await cookies();
   const session = cookieStore.get("session");
-  if (!session) {
+  if (!session || !session.value) {
     return null;
   }
   return JSON.parse(atob(session.value));

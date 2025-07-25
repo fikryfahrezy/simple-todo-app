@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/session";
+import { verifySession } from "@/lib/dal";
 import { SessionProvider } from "@/providers/session-provider";
-import { verifyToken } from "@/services/nodewave-service";
 import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
 
 export default async function AdminLayout({
@@ -9,18 +8,8 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = (await getSession()) as NodewaveServiceAuthzResponseBody;
+  const session = (await verifySession()) as NodewaveServiceAuthzResponseBody;
   if (!session || session.user.role !== "ADMIN") {
-    redirect("/login");
-  }
-
-  const tokenValidation = await verifyToken({
-    data: {
-      token: session.token,
-    },
-  });
-
-  if (!tokenValidation.success) {
     redirect("/login");
   }
 
