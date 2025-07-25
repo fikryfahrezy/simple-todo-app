@@ -9,7 +9,7 @@ export default async function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getSession<NodewaveServiceAuthzResponseBody>();
+  const session = (await getSession()) as NodewaveServiceAuthzResponseBody;
   if (!session || session.user.role !== "USER") {
     redirect("/login");
   }

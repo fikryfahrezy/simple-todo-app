@@ -1,5 +1,6 @@
 import "server-only";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 function defaultMaxAge() {
   // 1 day in seconds
@@ -29,11 +30,11 @@ export async function deleteSession() {
   cookieStore.delete("session");
 }
 
-export async function getSession<TData>() {
+export const getSession = cache(async () => {
   const cookieStore = await cookies();
   const session = cookieStore.get("session");
   if (!session) {
     return null;
   }
-  return JSON.parse(atob(session.value)) as TData;
-}
+  return JSON.parse(atob(session.value));
+});

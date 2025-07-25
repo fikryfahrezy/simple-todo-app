@@ -9,7 +9,7 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getSession<NodewaveServiceAuthzResponseBody>();
+  const session = (await getSession()) as NodewaveServiceAuthzResponseBody;
   if (!session || session.user.role !== "ADMIN") {
     redirect("/login");
   }
