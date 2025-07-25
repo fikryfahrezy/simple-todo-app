@@ -23,12 +23,12 @@ export function Navbar({
   return (
     <nav
       className={cn(
-        "tw:sticky tw:flex tw:p-2 tw:items-center tw:justify-between tw:top-0 tw:bg-background tw:border-b-[1px] tw:border-placeholder",
+        "tw:sticky tw:w-full tw:flex tw:p-2 tw:items-center tw:justify-between tw:top-0 tw:bg-background tw:border-b-[1px] tw:border-placeholder",
         className,
       )}
     >
       {withSearch && <SearchContext />}
-      <div className='tw:mr-16'>
+      <div className='tw:ml-auto'>
         <DropdownMenu>
           <DropdownMenuTrigger className='tw:flex tw:items-center tw:gap-4 tw:cursor-pointer'>
             <span>{userName}</span>

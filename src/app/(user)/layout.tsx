@@ -33,7 +33,7 @@ export default async function UserLayout({
     >
       <SessionProvider value={session}>
         <ReactQueryProvider>
-          <Navbar userName={session.user.fullName} />
+          <Navbar className='tw:pr-16' userName={session.user.fullName} />
           {children}
         </ReactQueryProvider>
       </SessionProvider>
