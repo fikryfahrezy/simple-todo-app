@@ -99,6 +99,7 @@ export async function loginAction(
 
   if (!validatedLoginForm.success) {
     return {
+      success: false,
       values: loginForm,
       fieldErrors: z.flattenError(validatedLoginForm.error).fieldErrors,
     };
@@ -113,11 +114,18 @@ export async function loginAction(
 
   if (!loginResult.success) {
     return {
+      success: false,
       values: loginForm,
       message: loginResult.response.message,
       errors: loginResult.response.errors,
     };
   }
+
+  const verifyTokenResult = await verifyToken({
+    data: {
+      token: loginResult.response.content.token,
+    },
+  });
 
   await createSession(
     loginResult.response.content,
@@ -126,14 +134,10 @@ export async function loginAction(
         365 * 24 * 60 * 60
       : undefined,
   );
-  const verifyTokenResult = await verifyToken({
-    data: {
-      token: loginResult.response.content.token,
-    },
-  });
 
   if (!verifyTokenResult.success) {
     return {
+      success: false,
       values: loginForm,
       message: verifyTokenResult.response.message,
       errors: verifyTokenResult.response.errors,

@@ -12,6 +12,7 @@ export type LoginFormValues = z.infer<typeof LoginFormSchema>;
 
 export type LoginFormState =
   | {
+      success: boolean;
       values?: LoginFormValues;
       message?: string;
       errors?: string[];

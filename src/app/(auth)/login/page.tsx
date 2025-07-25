@@ -27,10 +27,11 @@ export default function LoginPage() {
   );
 
   useEffect(() => {
-    if (!state?.errors) {
+    if (state?.success || !state?.errors) {
       return;
     }
-    toast.error("An error occurred. Please try again.", {
+
+    toast.error(state.message, {
       description: (
         <TypographyUnorderedList>
           {state.errors.map((error) => {
@@ -39,7 +40,7 @@ export default function LoginPage() {
         </TypographyUnorderedList>
       ),
     });
-  }, [state?.errors]);
+  }, [state?.success, state?.message, state?.errors]);
 
   return (
     <main>
