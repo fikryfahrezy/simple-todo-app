@@ -85,8 +85,10 @@ export type NodewaveServiceTodo = {
 export type NodewaveServiceCreateTodoResponse =
   NodewaveServiceResponse<NodewaveServiceTodo>;
 
+export type NodewaveServiceMarkTodoAction = "DONE" | "UNDONE";
+
 export type NodewaveServiceMarkTodoBody = {
-  item: string;
+  action: NodewaveServiceMarkTodoAction;
 };
 
 export type NodewaveServiceMarkTodoRequest = {
