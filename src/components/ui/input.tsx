@@ -46,7 +46,7 @@ export function InputRoot({
 }
 
 export type InputProps = React.ComponentProps<"input"> & {
-  dimension?: "sm" | "default" | "lg";
+  dimension?: "sm" | "default" | "lg" | "xl";
 };
 
 export function Input({
@@ -61,8 +61,12 @@ export function Input({
       data-slot='input'
       data-dimension={dimension}
       className={cn(
-        "tw:flex tw:w-full tw:data-[dimension=lg]:h-11 tw:data-[dimension=default]:h-9 tw:data-[dimension=sm]:h-8 tw:min-w-0 tw:px-3 tw:py-1 tw:rounded-md tw:border tw:border-input tw:bg-transparent tw:text-base tw:outline-none",
+        "tw:flex tw:w-full tw:min-w-0 tw:px-3 tw:py-1 tw:rounded-md tw:border tw:border-input tw:bg-transparent tw:text-base tw:outline-none",
         "tw:md:text-sm",
+        "tw:data-[dimension=sm]:h-8",
+        "tw:data-[dimension=default]:h-9",
+        "tw:data-[dimension=lg]:h-11",
+        "tw:data-[dimension=xl]:h-12 tw:data-[dimension=xl]:md:text-2xl",
         "tw:transition-[color,box-shadow] tw:placeholder:text-muted-foreground tw:selection:bg-primary tw:selection:text-primary-foreground tw:shadow-xs",
         "tw:focus-visible:border-ring tw:focus-visible:ring-ring/50 tw:focus-visible:ring-[3px]",
         "tw:disabled:pointer-events-none tw:disabled:cursor-not-allowed tw:disabled:opacity-50",

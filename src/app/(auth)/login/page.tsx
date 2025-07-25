@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 import { loginAction } from "@/actions/auth";
+import { CheckIcon } from "@/components/icons";
 import {
   TypographyH1,
   TypographyMuted,
@@ -11,7 +12,7 @@ import {
 } from "@/components/typograhpy";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox, CheckboxIndicator } from "@/components/ui/checkbox";
 import {
   InputFloatingLabel,
   InputFloatingTrigger,
@@ -114,7 +115,11 @@ export default function LoginPage() {
                 className='tw:data-[state=checked]:bg-ring'
                 key={state?.values?.rememberMe ? "checked" : "unchecked"}
                 defaultChecked={state?.values?.rememberMe}
-              />
+              >
+                <CheckboxIndicator>
+                  <CheckIcon className='tw:size-3.5' />
+                </CheckboxIndicator>
+              </Checkbox>
               <Label
                 htmlFor='rememberMe'
                 className='tw:text-secondary-foreground'
