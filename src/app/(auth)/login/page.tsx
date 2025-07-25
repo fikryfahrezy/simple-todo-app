@@ -48,7 +48,7 @@ export default function LoginPage() {
         Sign In
       </TypographyH1>
       <TypographyMuted className='tw:mb-12 tw:text-center tw:text-base'>
-        Let's Sign in first for enter into Square Website. Uh She Up!
+        Just sign in if you have an account in here. Enjoy our Website
       </TypographyMuted>
       <Card className='tw:mb-6 tw:shadow-[3px_-5px_40px_0_rgba(205,205,212,0.10)]'>
         <form action={action} className='tw:space-y-6'>
