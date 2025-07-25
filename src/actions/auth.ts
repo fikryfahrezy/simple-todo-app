@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createSession, deleteSession } from "@/lib/session";
 import {
@@ -83,7 +82,9 @@ export async function registerAction(
     };
   }
 
-  redirect("/");
+  return {
+    success: true,
+  };
 }
 
 export async function loginAction(
@@ -144,10 +145,11 @@ export async function loginAction(
     };
   }
 
-  redirect("/");
+  return {
+    success: true,
+  };
 }
 
 export async function logoutAction() {
   await deleteSession();
-  redirect("/");
 }
