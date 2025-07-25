@@ -17,7 +17,10 @@ export function InputRoot({
   ...props
 }: InputRootProps) {
   return (
-    <div className={cn("tw:relative tw:w-full", className)} {...props}>
+    <div
+      className={cn("tw:relative tw:flex tw:w-full tw:items-center", className)}
+      {...props}
+    >
       {startIcon && (
         <Slot
           data-slot='start-icon'
@@ -28,7 +31,7 @@ export function InputRoot({
       )}
       <Slot
         data-slot='input'
-        className={cn(startIcon && "tw:left-8", endIcon && "tw:right-8")}
+        className={cn(startIcon && "tw:pl-8", endIcon && "tw:pr-8")}
       >
         {children}
       </Slot>
@@ -47,21 +50,25 @@ export function InputRoot({
 
 export type InputProps = React.ComponentProps<"input"> & {
   dimension?: "sm" | "default" | "lg" | "xl";
+  border?: "all" | "bottom";
 };
 
 export function Input({
   className,
   type,
   dimension = "default",
+  border = "all",
   ...props
 }: InputProps) {
+  console.log(className);
   return (
     <input
       type={type}
       data-slot='input'
       data-dimension={dimension}
       className={cn(
-        "tw:flex tw:w-full tw:min-w-0 tw:px-3 tw:py-1 tw:rounded-md tw:border tw:border-input tw:bg-transparent tw:text-base tw:outline-none",
+        "tw:flex tw:w-full tw:min-w-0 tw:px-3 tw:py-1 tw:bg-transparent tw:text-base tw:outline-none",
+        "tw:placeholder:text-placeholder",
         "tw:md:text-sm",
         "tw:data-[dimension=sm]:h-8",
         "tw:data-[dimension=default]:h-9",
@@ -73,6 +80,8 @@ export function Input({
         "tw:file:text-foreground tw:file:inline-flex tw:file:h-7 tw:file:border-0 tw:file:bg-transparent tw:file:text-sm tw:file:font-medium",
         "tw:dark:bg-input/30",
         "tw:aria-invalid:ring-destructive/20 tw:dark:aria-invalid:ring-destructive/40 tw:aria-invalid:border-destructive",
+        border === "all" && "tw:border tw:border-input tw:rounded-md",
+        border === "bottom" && "tw:border-0 tw:border-b-2",
         className,
       )}
       {...props}

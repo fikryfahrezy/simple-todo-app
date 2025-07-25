@@ -1,6 +1,6 @@
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
   EllipsisIcon,
 } from "@/components/icons";
 import { type Button, buttonVariants } from "@/components/ui/button";
@@ -40,25 +40,25 @@ export function PaginationItem({ ...props }: React.ComponentProps<"li">) {
   return <li data-slot='pagination-item' {...props} />;
 }
 
-type PaginationLinkProps = {
+type PaginationButtonProps = {
   isActive?: boolean;
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
-  React.ComponentProps<"a">;
+  React.ComponentProps<"button">;
 
-export function PaginationLink({
+export function PaginationButton({
   className,
   isActive,
   size = "icon",
   ...props
-}: PaginationLinkProps) {
+}: PaginationButtonProps) {
   return (
-    <a
+    <button
       aria-current={isActive ? "page" : undefined}
       data-slot='pagination-link'
       data-active={isActive}
       className={cn(
         buttonVariants({
-          variant: isActive ? "outline" : "ghost",
+          variant: isActive ? "default" : "outline",
           size,
         }),
         className,
@@ -71,34 +71,38 @@ export function PaginationLink({
 export function PaginationPrevious({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+}: React.ComponentProps<typeof PaginationButton>) {
   return (
-    <PaginationLink
+    <PaginationButton
       aria-label='Go to previous page'
       size='default'
-      className={cn("tw:gap-1 tw:px-2.5 tw:sm:pl-2.5", className)}
+      className={cn(
+        "tw:gap-1 tw:px-2.5 tw:sm:pl-2.5 tw:mr-1.5 tw:border-0",
+        className,
+      )}
       {...props}
     >
-      <ChevronLeftIcon />
-      <span className='tw:hidden tw:sm:block'>Previous</span>
-    </PaginationLink>
+      <ArrowLeftIcon />
+    </PaginationButton>
   );
 }
 
 export function PaginationNext({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+}: React.ComponentProps<typeof PaginationButton>) {
   return (
-    <PaginationLink
+    <PaginationButton
       aria-label='Go to next page'
       size='default'
-      className={cn("tw:gap-1 tw:px-2.5 tw:sm:pr-2.5", className)}
+      className={cn(
+        "tw:gap-1 tw:px-2.5 tw:sm:pr-2.5 tw:ml-1.5 tw:border-0",
+        className,
+      )}
       {...props}
     >
-      <span className='tw:hidden tw:sm:block'>Next</span>
-      <ChevronRightIcon />
-    </PaginationLink>
+      <ArrowRightIcon />
+    </PaginationButton>
   );
 }
 

@@ -24,7 +24,7 @@ export function TableHeader({
   return (
     <thead
       data-slot='table-header'
-      className={cn("tw:[&_tr]:border-b", className)}
+      className={cn("tw:[&_tr]:border-b tw:[&_tr]:bg-accent", className)}
       {...props}
     />
   );
@@ -77,7 +77,7 @@ export function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot='table-head'
       className={cn(
-        "tw:text-foreground tw:h-10 tw:px-2 tw:text-left tw:align-middle tw:font-medium tw:whitespace-nowrap tw:[&:has([role=checkbox])]:pr-0 tw:[&>[role=checkbox]]:translate-y-[2px]",
+        "tw:text-base tw:text-foreground tw:h-10 tw:px-2 tw:text-left tw:align-middle tw:font-medium tw:whitespace-nowrap tw:[&:has([role=checkbox])]:pr-0 tw:[&>[role=checkbox]]:translate-y-[2px]",
         className,
       )}
       {...props}
@@ -90,7 +90,7 @@ export function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot='table-cell'
       className={cn(
-        "tw:p-2 tw:align-middle tw:whitespace-nowrap tw:[&:has([role=checkbox])]:pr-0 tw:[&>[role=checkbox]]:translate-y-[2px]",
+        "tw:text-base tw:p-2 tw:align-middle tw:whitespace-nowrap tw:[&:has([role=checkbox])]:pr-0 tw:[&>[role=checkbox]]:translate-y-[2px]",
         className,
       )}
       {...props}

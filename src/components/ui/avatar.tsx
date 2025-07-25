@@ -52,7 +52,7 @@ export function AvatarFallback({
 export function AvatarOnline() {
   return (
     <span className='tw:absolute tw:flex tw:size-4 tw:items-center tw:justify-center tw:-right-1 tw:-bottom-1 tw:rounded-full tw:bg-background'>
-      <span className='tw:size-2 tw:bg-[#72E128] tw:rounded-full'></span>
+      <span className='tw:size-2 tw:bg-success tw:rounded-full'></span>
     </span>
   );
 }

@@ -22,7 +22,13 @@ export function SelectRoot({
   ...props
 }: SelectRootProps) {
   return (
-    <div className={cn("tw:relative tw:w-full", className)} {...props}>
+    <div
+      className={cn(
+        "tw:relative tw:flex tw:w-full tw:items-center ",
+        className,
+      )}
+      {...props}
+    >
       {startIcon && (
         <Slot
           data-slot='start-icon'
@@ -33,7 +39,7 @@ export function SelectRoot({
       )}
       <Slot
         data-slot='select'
-        className={cn(startIcon && "tw:left-8", endIcon && "tw:right-8")}
+        className={cn(startIcon && "tw:pl-8", endIcon && "tw:pr-8")}
       >
         {children}
       </Slot>
@@ -52,12 +58,14 @@ export function SelectRoot({
 
 export type SelectProps = React.ComponentProps<"select"> & {
   dimension?: "sm" | "default" | "lg";
+  border?: "all" | "bottom";
 };
 
 export function Select({
   value,
   className,
   dimension = "default",
+  border = "all",
   onChange: onChangeProp = noop,
   ...restProps
 }: SelectProps) {
@@ -77,12 +85,14 @@ export function Select({
       data-selected={selected || undefined}
       onChange={onChange}
       className={cn(
-        "tw:w-full tw:data-[dimension=lg]:h-11 tw:data-[dimension=default]:h-9 tw:data-[dimension=sm]:h-8 tw:border-input tw:rounded-md tw:border tw:bg-transparent tw:px-3 tw:py-2 tw:text-sm tw:whitespace-nowrap tw:outline-none tw:appearance-none",
+        "tw:w-full tw:data-[dimension=lg]:h-11 tw:data-[dimension=default]:h-9 tw:data-[dimension=sm]:h-8 tw:bg-transparent tw:px-3 tw:py-2 tw:text-sm tw:whitespace-nowrap tw:outline-none tw:appearance-none",
         "tw:shadow-xs tw:transition-[color,box-shadow]",
         "tw:disabled:cursor-not-allowed tw:disabled:opacity-50",
         "tw:focus-visible:ring-[3px] tw:focus-visible:ring-ring/50",
         "tw:dark:aria-invalid:ring-destructive/40 tw:dark:bg-input/30 tw:dark:hover:bg-input/50",
         "tw:aria-invalid:ring-destructive/20 tw:aria-invalid:border-destructive",
+        border === "all" && "tw:border tw:border-input tw:rounded-md",
+        border === "bottom" && "tw:border-0 tw:border-b-2",
         className,
       )}
       {...restProps}
