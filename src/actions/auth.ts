@@ -118,8 +118,8 @@ export async function loginAction(
   await createSession(
     loginResult.response.content,
     loginForm.rememberMe
-      ? // Make the session expire in long time
-        new Date(Date.now() * 365 * 24 * 60 * 60 * 1000)
+      ? // Make the session expire in long time, 1 year in seconds
+        365 * 24 * 60 * 60
       : undefined,
   );
   const verifyTokenResult = await verifyToken({

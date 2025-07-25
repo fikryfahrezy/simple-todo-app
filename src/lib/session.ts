@@ -1,13 +1,14 @@
 import "server-only";
 import { cookies } from "next/headers";
 
-function defaultExpiresAt() {
-  return new Date(Date.now() * 24 * 60 * 60 * 1000);
+function defaultMaxAge() {
+  // 1 day in seconds
+  return 24 * 60 * 60;
 }
 
 export async function createSession<TData>(
   data: TData,
-  expiresAt = defaultExpiresAt(),
+  expiresAt = defaultMaxAge(),
 ) {
   // Just use simple bass-64 for now, can be replaced with something more secure later.
   const session = btoa(JSON.stringify(data));
@@ -17,7 +18,7 @@ export async function createSession<TData>(
   cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
-    expires: expiresAt,
+    maxAge: expiresAt,
     sameSite: "lax",
     path: "/",
   });
