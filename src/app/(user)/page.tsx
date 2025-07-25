@@ -131,7 +131,7 @@ const TodoItem = ({ todoItem }: TodoItemProps) => {
           <CheckIcon className='tw:size-5' strokeWidth='4' />
         </CheckboxIndicator>
       </Checkbox>
-      <p className='tw:text-3xl tw:text-neutral-[#323232] tw:flex-[1]'>
+      <p className='tw:text-3xl tw:text-neutral-700 tw:flex-[1]'>
         {isDeleting ? "Loading deleting..." : todoItem.item}
       </p>
       {markTodo.isPending ? (
@@ -139,9 +139,9 @@ const TodoItem = ({ todoItem }: TodoItemProps) => {
       ) : (
         <Button variant='ghost' size='none' onClick={onMarkClick}>
           {todoItem.isDone ? (
-            <CheckCircleIcon className='tw:text-[#6DD230] tw:size-8' />
+            <CheckCircleIcon className='tw:text-success tw:size-8' />
           ) : (
-            <XCircleIcon className='tw:text-[#F01414] tw:size-8' />
+            <XCircleIcon className='tw:text-destructive tw:size-8' />
           )}
         </Button>
       )}
