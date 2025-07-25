@@ -13,6 +13,8 @@ import {
 } from "@/schemas/register-form-schema";
 import { login, register, verifyToken } from "@/services/nodewave-service";
 
+const EMAIL_DOMAIN = process.env.NEXT_PUBLIC_NODEWAVE_EMAIL_DOMAIN;
+
 export async function registerAction(
   _: RegisterFormState,
   formData: FormData,
@@ -20,12 +22,24 @@ export async function registerAction(
   // The return from the `formData.get` is either a File or string,
   // in this case it should always be a string, but TypeScript doesn't know that.
   // So we need to cast it to a string.
+  //
+  // Add fallback to empty strin in-case the field not provided
+  // to prevent handling `null` value
   const registerForm = {
-    fullName: String(formData.get("fullName")),
-    email: String(formData.get("email")),
-    password: String(formData.get("password")),
+    email: String(formData.get("email") ?? ""),
+    firstName: String(formData.get("firstName") ?? ""),
+    lastName: String(formData.get("lastName") ?? ""),
+    phoneRegion: String(formData.get("phoneRegion") ?? ""),
+    phoneNumber: String(formData.get("phoneNumber") ?? ""),
+    country: String(formData.get("country") ?? ""),
+    password: String(formData.get("password") ?? ""),
+    confirmPassword: String(formData.get("confirmPassword") ?? ""),
   };
-  const validatedRegisterForm = RegisterFormSchema.safeParse(registerForm);
+  const emailWithDomain = `${registerForm.email}${EMAIL_DOMAIN}`;
+  const validatedRegisterForm = RegisterFormSchema.safeParse({
+    ...registerForm,
+    email: emailWithDomain,
+  });
 
   if (!validatedRegisterForm.success) {
     return {
@@ -35,7 +49,11 @@ export async function registerAction(
   }
 
   const registerResult = await register({
-    data: validatedRegisterForm.data,
+    data: {
+      fullName: `${validatedRegisterForm.data.firstName} ${validatedRegisterForm.data.lastName}`,
+      email: emailWithDomain,
+      password: validatedRegisterForm.data.password,
+    },
   });
 
   if (!registerResult.success) {
