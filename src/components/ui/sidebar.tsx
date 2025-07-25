@@ -10,7 +10,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { PanelLeftIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -282,7 +281,26 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <svg
+        width='14'
+        height='14'
+        viewBox='0 0 14 14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <title>Double Arrow Left Icon</title>
+        <path
+          d='M7.48542 0.888444C7.00818 0.411209 6.23443 0.411209 5.75719 0.888444L0.510324 6.13531C0.0330169 6.61262 0.0330169 7.38649 0.510324 7.8638L5.75719 13.1107C6.23443 13.5879 7.00818 13.5879 7.48542 13.1107C7.96265 12.6334 7.96265 11.8597 7.48542 11.3824L3.96677 7.8638C3.48946 7.38649 3.48946 6.61262 3.96677 6.13531L7.48542 2.61667C7.96265 2.13943 7.96265 1.36568 7.48542 0.888444Z'
+          fill='#4C4E64'
+          fillOpacity='0.68'
+        />
+        <path
+          d='M11.8683 0.888444L6.62141 6.13531C6.1441 6.61262 6.1441 7.38649 6.62141 7.8638L11.8683 13.1107C12.3455 13.5879 13.1193 13.5879 13.5965 13.1107C14.0737 12.6334 14.0737 11.8597 13.5965 11.3824L10.0779 7.8638C9.60055 7.38649 9.60055 6.61262 10.0779 6.13531L13.5965 2.61667C14.0737 2.13943 14.0737 1.36568 13.5965 0.888444C13.1193 0.411209 12.3455 0.411209 11.8683 0.888444Z'
+          fill='#4C4E64'
+          fillOpacity='0.38'
+        />
+      </svg>
+
       <span className='tw:sr-only'>Toggle Sidebar</span>
     </Button>
   );
