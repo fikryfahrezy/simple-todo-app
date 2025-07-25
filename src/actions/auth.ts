@@ -69,8 +69,9 @@ export async function loginAction(
   formData: FormData,
 ): Promise<LoginFormState> {
   const loginForm = {
-    email: String(formData.get("email")),
-    password: String(formData.get("password")),
+    email: String(formData.get("email") ?? ""),
+    password: String(formData.get("password") ?? ""),
+    rememberMe: formData.get("rememberMe") === "on",
   };
   const validatedLoginForm = LoginFormSchema.safeParse(loginForm);
 
@@ -82,7 +83,10 @@ export async function loginAction(
   }
 
   const loginResult = await login({
-    data: validatedLoginForm.data,
+    data: {
+      email: validatedLoginForm.data.email,
+      password: validatedLoginForm.data.password,
+    },
   });
 
   if (!loginResult.success) {
@@ -93,7 +97,13 @@ export async function loginAction(
     };
   }
 
-  await createSession(loginResult.response.content);
+  await createSession(
+    loginResult.response.content,
+    loginForm.rememberMe
+      ? // Make the session expire in long time
+        new Date(Date.now() * 365 * 24 * 60 * 60 * 1000)
+      : undefined,
+  );
   const verifyTokenResult = await verifyToken({
     data: {
       token: loginResult.response.content.token,

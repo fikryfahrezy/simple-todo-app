@@ -1,9 +1,11 @@
-import type { z } from "zod";
+import { z } from "zod";
 import { RegisterFormSchema } from "@/schemas/register-form-schema";
 
 export const LoginFormSchema = RegisterFormSchema.pick({
   email: true,
   password: true,
+}).extend({
+  rememberMe: z.boolean().optional(),
 });
 
 export type LoginFormValues = z.infer<typeof LoginFormSchema>;
