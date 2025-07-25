@@ -1,6 +1,9 @@
 import {
+  type InfiniteData,
   type MutationOptions,
+  type UseInfiniteQueryOptions,
   type UseQueryOptions,
+  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
@@ -25,10 +28,13 @@ import type {
 } from "@/services/nodewave-service.types";
 
 export const todoKeys = {
-  all: ["todos"] as const,
-  lists: () => [...todoKeys.all, "lists"] as const,
-  list: (queryParams: NodewaveServiceAllTodosParams) =>
-    [...todoKeys.lists(), queryParams] as const,
+  all: ["todos"],
+  lists: () => {
+    return [...todoKeys.all, "lists"] as const;
+  },
+  list: (queryParams: NodewaveServiceAllTodosParams) => {
+    return [...todoKeys.lists(), queryParams] as const;
+  },
 };
 
 export function useGetAllTodos(
@@ -48,6 +54,49 @@ export function useGetAllTodos(
       }
 
       return result.response;
+    },
+    ...options,
+  });
+}
+
+export function useInfiniteGetAllTodos(
+  params: NodewaveServiceAllTodosRequest,
+  options?: Omit<
+    UseInfiniteQueryOptions<
+      NodewaveServiceAllTodosResponse,
+      RequestError,
+      InfiniteData<NodewaveServiceAllTodosResponse, unknown>,
+      readonly unknown[],
+      number
+    >,
+    | "queryKey"
+    | "queryFn"
+    | "initialPageParam"
+    | "getPreviousPageParam"
+    | "getNextPageParam"
+  >,
+) {
+  return useInfiniteQuery({
+    queryKey: todoKeys.list(params.params),
+    initialPageParam: 1,
+    queryFn: async ({ pageParam }) => {
+      console.log(pageParam);
+      const result = await getAllTodos({
+        ...params,
+        params: { ...params.params, page: pageParam },
+      });
+
+      if (!result.success) {
+        throw new RequestError(result.response.message, result.response.errors);
+      }
+
+      return result.response;
+    },
+    getNextPageParam: (lastPage, __, lastPageParam) => {
+      if (lastPage.content.entries.length === 0) {
+        return undefined;
+      }
+      return lastPageParam + 1;
     },
     ...options,
   });
