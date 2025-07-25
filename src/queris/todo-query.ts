@@ -80,7 +80,6 @@ export function useInfiniteGetAllTodos(
     queryKey: todoKeys.list(params.params),
     initialPageParam: 1,
     queryFn: async ({ pageParam }) => {
-      console.log(pageParam);
       const result = await getAllTodos({
         ...params,
         params: { ...params.params, page: pageParam },
