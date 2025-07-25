@@ -284,6 +284,7 @@ export default function UserPage() {
                 id='taskInput'
                 placeholder='Input task'
                 dimension='xl'
+                className='tw:bg-accent tw:border-0 tw:border-b-2 tw:border-b-blue-900 tw:rounded-xs'
                 value={item}
                 onChange={onTaskInputChange}
               />
