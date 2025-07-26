@@ -35,11 +35,7 @@ export function TableBody({
   ...props
 }: React.ComponentProps<"tbody">) {
   return (
-    <tbody
-      data-slot='table-body'
-      className={cn("tw:[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
+    <tbody data-slot='table-body' className={cn("", className)} {...props} />
   );
 }
 
