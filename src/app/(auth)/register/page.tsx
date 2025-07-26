@@ -343,14 +343,14 @@ export default function RegisterPage() {
               asChild
               type='button'
               variant='secondary'
-              className='tw:w-full tw:lg:w-2/5'
+              className='tw:w-full tw:lg:w-2/6'
             >
               <Link href='/login'>Login</Link>
             </Button>
             <Button
               disabled={pending}
               type='submit'
-              className='tw:w-full tw:lg:w-3/5'
+              className='tw:w-full tw:lg:w-4/6'
             >
               Register
             </Button>
