@@ -20,7 +20,7 @@ export async function createSession<TData>(
     httpOnly: true,
     secure: true,
     maxAge: expiresAt,
-    sameSite: "lax",
+    sameSite: "none",
     path: "/",
   });
 }
