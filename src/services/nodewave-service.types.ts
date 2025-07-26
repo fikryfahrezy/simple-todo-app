@@ -80,6 +80,7 @@ export type NodewaveServiceTodo = {
   isDone: boolean;
   createdAt: string;
   updatedAt: string;
+  user?: Pick<NodewaveServiceUser, "id" | "email" | "fullName">;
 };
 
 export type NodewaveServiceCreateTodoResponse =
