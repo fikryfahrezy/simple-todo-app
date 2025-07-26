@@ -17,7 +17,7 @@ import {
   useDeleteTodo,
   useInfiniteGetAllTodos,
   useMarkTodo,
-} from "@/queris/todo-query";
+} from "@/queries/todo-query";
 import type {
   NodewaveServiceAuthzResponseBody,
   NodewaveServiceTodo,

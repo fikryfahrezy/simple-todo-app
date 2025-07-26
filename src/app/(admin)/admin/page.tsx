@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/table";
 import { useSession } from "@/hooks/use-session";
 import { range } from "@/lib/array";
-import { useGetAllTodos } from "@/queris/todo-query";
+import { useGetAllTodos } from "@/queries/todo-query";
 import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
 
 const AVAILABLE_STATUSES = [
