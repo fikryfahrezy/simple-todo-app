@@ -90,7 +90,7 @@
 }
 
 .scrollbox {
-  overflow: auto;
+  overflow-y: auto;
 
   /* Shadow covers */
   background:

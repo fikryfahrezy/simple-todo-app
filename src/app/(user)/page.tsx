@@ -300,7 +300,7 @@ export default function UserPage() {
               </Button>
             </form>
           </div>
-          <div className='scrollbox tw:max-h-[250px] tw:overflow-y-auto tw:space-y-7 tw:bg-no-repeat'>
+          <div className='scrollbox tw:max-h-[250px] tw:space-y-7'>
             {getAllTodos.isPending ? (
               <p className='tw:text-center'>Loading...</p>
             ) : getAllTodos.isError ? (
@@ -311,18 +311,20 @@ export default function UserPage() {
               <p className='tw:text-center'>Empty</p>
             ) : (
               <>
-                {getAllTodos.data?.pages.map((page, pageIndex) => {
-                  return (
-                    // biome-ignore lint/suspicious/noArrayIndexKey: this is fine, as the index never re-arrange
-                    <Fragment key={pageIndex}>
-                      {page.content.entries.map((todoItem) => {
-                        return (
-                          <TodoItem key={todoItem.id} todoItem={todoItem} />
-                        );
-                      })}
-                    </Fragment>
-                  );
-                })}
+                <div className='tw:space-y-7'>
+                  {getAllTodos.data?.pages.map((page, pageIndex) => {
+                    return (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: this is fine, as the index never re-arrange
+                      <Fragment key={pageIndex}>
+                        {page.content.entries.map((todoItem) => {
+                          return (
+                            <TodoItem key={todoItem.id} todoItem={todoItem} />
+                          );
+                        })}
+                      </Fragment>
+                    );
+                  })}
+                </div>
                 <Intersector onIntsersecting={onEndReached} />
               </>
             )}
