@@ -3,24 +3,21 @@ import "server-only";
 import { cache } from "react";
 import { verifyToken } from "@/services/nodewave-service";
 import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
-import { deleteSession, getSession } from "./session";
+import { getSession } from "./session";
 
 export const verifySession = cache(async () => {
-  const session = (await getSession()) as NodewaveServiceAuthzResponseBody;
-  if (!session) {
+  const value = (await getSession()) as NodewaveServiceAuthzResponseBody;
+  if (!value) {
     return null;
   }
 
   const tokenValidation = await verifyToken({
     data: {
-      token: session.token,
+      token: value.token,
     },
   });
 
-  if (!tokenValidation.success) {
-    await deleteSession();
-    return null;
-  }
+  const isValid = tokenValidation.success;
 
-  return session;
+  return { isValid, value };
 });

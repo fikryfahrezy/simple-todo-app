@@ -1,20 +1,19 @@
 import { getImageProps } from "next/image";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/session";
+import { verifySession } from "@/lib/dal";
 import { getBackgroundImage } from "@/lib/utils";
-import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
 
 export default async function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = (await getSession()) as NodewaveServiceAuthzResponseBody;
-  if (session && session.user.role === "USER") {
+  const session = await verifySession();
+  if (session?.isValid && session.value.user.role === "USER") {
     redirect("/");
   }
 
-  if (session && session.user.role === "ADMIN") {
+  if (session?.isValid && session.value.user.role === "ADMIN") {
     redirect("/admin");
   }
 

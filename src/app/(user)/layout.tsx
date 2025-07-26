@@ -5,15 +5,14 @@ import { verifySession } from "@/lib/dal";
 import { getBackgroundImage } from "@/lib/utils";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { SessionProvider } from "@/providers/session-provider";
-import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
 
 export default async function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = (await verifySession()) as NodewaveServiceAuthzResponseBody;
-  if (!session || session.user.role !== "USER") {
+  const session = await verifySession();
+  if (!session || !session.isValid || session.value.user.role !== "USER") {
     redirect("/login");
   }
 
@@ -31,9 +30,9 @@ export default async function UserLayout({
       style={{ backgroundImage: backgroundShapeImageSrc }}
       className='tw:w-full tw:h-dvh tw:bg-neutral-200 tw:bg-no-repeat tw:bg-size-[100%_50%]'
     >
-      <SessionProvider value={session}>
+      <SessionProvider value={session.value}>
         <ReactQueryProvider>
-          <Navbar className='tw:pr-16' userName={session.user.fullName} />
+          <Navbar className='tw:pr-16' userName={session.value.user.fullName} />
           {children}
         </ReactQueryProvider>
       </SessionProvider>
