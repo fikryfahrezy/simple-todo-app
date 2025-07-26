@@ -109,7 +109,7 @@ export type NodewaveServiceAllTodosResponseBody = {
 export type NodewaveServiceAllTodosParams = {
   page?: number;
   rows?: number;
-  filters?: Record<string, never>;
+  filters?: Record<string, unknown>;
 };
 
 export type NodewaveServiceAllTodosRequest = {
