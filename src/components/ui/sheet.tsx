@@ -11,18 +11,6 @@ export function Sheet({
   return <SheetPrimitive.Root data-slot='sheet' {...props} />;
 }
 
-export function SheetTrigger({
-  ...props
-}: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
-  return <SheetPrimitive.Trigger data-slot='sheet-trigger' {...props} />;
-}
-
-export function SheetClose({
-  ...props
-}: React.ComponentProps<typeof SheetPrimitive.Close>) {
-  return <SheetPrimitive.Close data-slot='sheet-close' {...props} />;
-}
-
 export function SheetPortal({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Portal>) {
@@ -90,22 +78,6 @@ export function SheetHeader({
     <div
       data-slot='sheet-header'
       className={cn("tw:flex tw:flex-col tw:gap-1.5 tw:p-4", className)}
-      {...props}
-    />
-  );
-}
-
-export function SheetFooter({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot='sheet-footer'
-      className={cn(
-        "tw:mt-auto tw:flex tw:flex-col tw:gap-2 tw:p-4",
-        className,
-      )}
       {...props}
     />
   );

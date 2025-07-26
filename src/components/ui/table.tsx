@@ -43,22 +43,6 @@ export function TableBody({
   );
 }
 
-export function TableFooter({
-  className,
-  ...props
-}: React.ComponentProps<"tfoot">) {
-  return (
-    <tfoot
-      data-slot='table-footer'
-      className={cn(
-        "tw:bg-muted/50 tw:border-t tw:font-medium tw:[&>tr]:last:border-b-0",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
 export function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
@@ -93,19 +77,6 @@ export function TableCell({ className, ...props }: React.ComponentProps<"td">) {
         "tw:text-base tw:p-2 tw:align-middle tw:whitespace-nowrap tw:[&:has([role=checkbox])]:pr-0 tw:[&>[role=checkbox]]:translate-y-[2px]",
         className,
       )}
-      {...props}
-    />
-  );
-}
-
-export function TableCaption({
-  className,
-  ...props
-}: React.ComponentProps<"caption">) {
-  return (
-    <caption
-      data-slot='table-caption'
-      className={cn("tw:text-muted-foreground tw:mt-4 tw:text-sm", className)}
       {...props}
     />
   );

@@ -1,8 +1,4 @@
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  EllipsisIcon,
-} from "@/components/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { type Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -103,25 +99,5 @@ export function PaginationNext({
     >
       <ArrowRightIcon />
     </PaginationButton>
-  );
-}
-
-export function PaginationEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      aria-hidden
-      data-slot='pagination-ellipsis'
-      className={cn(
-        "tw:flex tw:size-9 tw:items-center tw:justify-center",
-        className,
-      )}
-      {...props}
-    >
-      <EllipsisIcon className='tw:size-4' />
-      <span className='tw:sr-only'>More pages</span>
-    </span>
   );
 }
