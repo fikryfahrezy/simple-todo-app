@@ -51,10 +51,6 @@ export default function AdminPage() {
   const searchQuery = searchParams.get(SEARCH_PARAM_NAME) || undefined;
   const statusQuery = searchParams.get(STATUS_PARAM_NAME) || undefined;
 
-  const totalPages = 20;
-  const lastPage = Math.min(Math.max(currentPageQuery + 2, 5), totalPages);
-  const firstPage = Math.max(1, lastPage - 4);
-
   const getAllTodos = useGetAllTodos({
     token: session.token,
     params: {
@@ -66,6 +62,10 @@ export default function AdminPage() {
       },
     },
   });
+
+  const totalPage = getAllTodos.data?.content?.totalPage || 1;
+  const lastPage = Math.min(Math.max(currentPageQuery + 2, 5), totalPage);
+  const firstPage = Math.max(1, lastPage - 4);
 
   const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams ?? undefined);
@@ -80,7 +80,14 @@ export default function AdminPage() {
 
   const handleFilterChange = (key: string, value: unknown) => {
     const params = new URLSearchParams(searchParams ?? undefined);
+    params.set(PAGE_PARAM_NAME, "1");
     params.set(key, String(value));
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const handlePageChange = (value: unknown) => {
+    const params = new URLSearchParams(searchParams ?? undefined);
+    params.set(SEARCH_PARAM_NAME, String(value));
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -94,14 +101,11 @@ export default function AdminPage() {
   };
 
   const goToPreviousPage = (): void => {
-    handleFilterChange(PAGE_PARAM_NAME, Math.max(currentPageQuery - 1, 1));
+    handlePageChange(Math.max(currentPageQuery - 1, 1));
   };
 
   const goToNextPage = (): void => {
-    handleFilterChange(
-      PAGE_PARAM_NAME,
-      Math.min(currentPageQuery + 1, totalPages),
-    );
+    handlePageChange(Math.min(currentPageQuery + 1, totalPage));
   };
 
   const onStatusFilterChange = (
@@ -189,7 +193,7 @@ export default function AdminPage() {
                 return (
                   <TableRow key={todoItem.id}>
                     <TableCell className='tw:w-1/3'>
-                      {todoItem.userId}
+                      {todoItem.user?.fullName}
                     </TableCell>
                     <TableCell className='tw:w-1/3'>{todoItem.item}</TableCell>
                     <TableCell className='tw:w-1/3'>
