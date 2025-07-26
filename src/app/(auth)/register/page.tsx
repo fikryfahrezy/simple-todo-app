@@ -113,7 +113,7 @@ export default function RegisterPage() {
               <InputRoot
                 placeholder={
                   <InputFloatingLabel htmlFor='lastName'>
-                    First Name
+                    Last Name
                   </InputFloatingLabel>
                 }
               >
