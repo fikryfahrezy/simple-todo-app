@@ -252,17 +252,19 @@ export default function UserPage() {
   ]);
 
   useEffect(() => {
-    if (getAllTodos.error) {
-      toast.error(getAllTodos.error.message, {
-        description: (
-          <TypographyUnorderedList>
-            {getAllTodos.error.errors.map((error) => {
-              return <li key={error}>{error}</li>;
-            })}
-          </TypographyUnorderedList>
-        ),
-      });
+    if (!getAllTodos.error) {
+      return;
     }
+
+    toast.error(getAllTodos.error.message, {
+      description: (
+        <TypographyUnorderedList>
+          {getAllTodos?.error?.errors?.map((error) => {
+            return <li key={error}>{error}</li>;
+          })}
+        </TypographyUnorderedList>
+      ),
+    });
   }, [getAllTodos.error]);
 
   return (
