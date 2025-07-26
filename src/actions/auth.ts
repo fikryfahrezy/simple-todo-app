@@ -71,8 +71,6 @@ export async function registerAction(
     },
   });
 
-  await createSession(registerResult.response.content);
-
   if (!verifyTokenResult.success) {
     return {
       success: false,
@@ -81,6 +79,8 @@ export async function registerAction(
       errors: verifyTokenResult.response.errors,
     };
   }
+
+  await createSession(registerResult.response.content);
 
   return {
     success: true,
@@ -128,14 +128,6 @@ export async function loginAction(
     },
   });
 
-  await createSession(
-    loginResult.response.content,
-    loginForm.rememberMe
-      ? // Make the session expire in long time, 1 year in seconds
-        365 * 24 * 60 * 60
-      : undefined,
-  );
-
   if (!verifyTokenResult.success) {
     return {
       success: false,
@@ -144,6 +136,14 @@ export async function loginAction(
       errors: verifyTokenResult.response.errors,
     };
   }
+
+  await createSession(
+    loginResult.response.content,
+    loginForm.rememberMe
+      ? // Make the session expire in long time, 1 year in seconds
+        365 * 24 * 60 * 60
+      : undefined,
+  );
 
   return {
     success: true,
