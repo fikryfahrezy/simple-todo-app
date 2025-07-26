@@ -60,7 +60,6 @@ export function Input({
   border = "all",
   ...props
 }: InputProps) {
-  console.log(className);
   return (
     <input
       type={type}
