@@ -74,7 +74,7 @@ export function SearchContext({ className }: SearchContextProps) {
         className,
       )}
     >
-      <StarIcon />
+      <StarIcon className='tw:text-neutral-700' />
       Search (Ctrl+/)
       {searchOpen &&
         createPortal(
