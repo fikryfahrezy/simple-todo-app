@@ -1,23 +1,23 @@
 import axios from "axios";
 import type {
-  NodewaveServiceAllTodosRequest,
-  NodewaveServiceAllTodosResponse,
-  NodewaveServiceAuthzResponse,
-  NodewaveServiceCreateTodoRequest,
-  NodewaveServiceCreateTodoResponse,
-  NodewaveServiceDeleteTodoRequest,
-  NodewaveServiceDeleteTodoResponse,
-  NodewaveServiceLoginRequest,
-  NodewaveServiceMarkTodoRequest,
-  NodewaveServiceMarkTodoResponse,
-  NodewaveServiceRegisterRequest,
-  NodewaveServiceResponseFail,
-  NodewaveServiceResult,
-  NodewaveServiceVerifyTokenRequest,
-  NodewaveServiceVerifyTokenResponse,
-} from "@/services/nodewave-service.types";
+  TodoServiceAllTodosRequest,
+  TodoServiceAllTodosResponse,
+  TodoServiceAuthzResponse,
+  TodoServiceCreateTodoRequest,
+  TodoServiceCreateTodoResponse,
+  TodoServiceDeleteTodoRequest,
+  TodoServiceDeleteTodoResponse,
+  TodoServiceLoginRequest,
+  TodoServiceMarkTodoRequest,
+  TodoServiceMarkTodoResponse,
+  TodoServiceRegisterRequest,
+  TodoServiceResponseFail,
+  TodoServiceResult,
+  TodoServiceVerifyTokenRequest,
+  TodoServiceVerifyTokenResponse,
+} from "@/services/todo-service.types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_NODEWAVE_SERVICE_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_SERVICE_API_URL;
 
 export class RequestError extends Error {
   errors: string[];
@@ -36,14 +36,11 @@ const axiosInstance = axios.create({
 
 export async function register({
   data,
-}: NodewaveServiceRegisterRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceAuthzResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceRegisterRequest): Promise<
+  TodoServiceResult<TodoServiceAuthzResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.post<
-    NodewaveServiceAuthzResponse | NodewaveServiceResponseFail
+    TodoServiceAuthzResponse | TodoServiceResponseFail
   >("/register", data);
 
   if (!res.data.content) {
@@ -61,14 +58,11 @@ export async function register({
 
 export async function login({
   data,
-}: NodewaveServiceLoginRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceAuthzResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceLoginRequest): Promise<
+  TodoServiceResult<TodoServiceAuthzResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.post<
-    NodewaveServiceAuthzResponse | NodewaveServiceResponseFail
+    TodoServiceAuthzResponse | TodoServiceResponseFail
   >("/login", data);
 
   if (!res.data.content) {
@@ -86,14 +80,11 @@ export async function login({
 
 export async function verifyToken({
   data,
-}: NodewaveServiceVerifyTokenRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceVerifyTokenResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceVerifyTokenRequest): Promise<
+  TodoServiceResult<TodoServiceVerifyTokenResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.post<
-    NodewaveServiceVerifyTokenResponse | NodewaveServiceResponseFail
+    TodoServiceVerifyTokenResponse | TodoServiceResponseFail
   >("/verify-token", data);
 
   if (!res.data.content) {
@@ -112,14 +103,11 @@ export async function verifyToken({
 export async function createNewTodo({
   data,
   token,
-}: NodewaveServiceCreateTodoRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceCreateTodoResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceCreateTodoRequest): Promise<
+  TodoServiceResult<TodoServiceCreateTodoResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.post<
-    NodewaveServiceCreateTodoResponse | NodewaveServiceResponseFail
+    TodoServiceCreateTodoResponse | TodoServiceResponseFail
   >("/todos", data, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -143,14 +131,11 @@ export async function markTodo({
   todoId,
   data,
   token,
-}: NodewaveServiceMarkTodoRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceMarkTodoResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceMarkTodoRequest): Promise<
+  TodoServiceResult<TodoServiceMarkTodoResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.put<
-    NodewaveServiceMarkTodoResponse | NodewaveServiceResponseFail
+    TodoServiceMarkTodoResponse | TodoServiceResponseFail
   >(`/todos/${todoId}/mark`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -173,16 +158,13 @@ export async function markTodo({
 export async function getAllTodos({
   params,
   token,
-}: NodewaveServiceAllTodosRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceAllTodosResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceAllTodosRequest): Promise<
+  TodoServiceResult<TodoServiceAllTodosResponse, TodoServiceResponseFail>
 > {
   const { page = 1, rows = 10, filters = undefined } = params;
 
   const res = await axiosInstance.get<
-    NodewaveServiceAllTodosResponse | NodewaveServiceResponseFail
+    TodoServiceAllTodosResponse | TodoServiceResponseFail
   >("/todos", {
     params: {
       page,
@@ -210,14 +192,11 @@ export async function getAllTodos({
 export async function deleteTodoById({
   todoId,
   token,
-}: NodewaveServiceDeleteTodoRequest): Promise<
-  NodewaveServiceResult<
-    NodewaveServiceDeleteTodoResponse,
-    NodewaveServiceResponseFail
-  >
+}: TodoServiceDeleteTodoRequest): Promise<
+  TodoServiceResult<TodoServiceDeleteTodoResponse, TodoServiceResponseFail>
 > {
   const res = await axiosInstance.delete<
-    NodewaveServiceDeleteTodoResponse | NodewaveServiceResponseFail
+    TodoServiceDeleteTodoResponse | TodoServiceResponseFail
   >(`/todos/${todoId}`, {
     headers: {
       Authorization: `Bearer ${token}`,

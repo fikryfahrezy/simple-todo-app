@@ -21,7 +21,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton className='tw:text-sidebar-accent-foreground tw:text-xl tw:font-bold tw:pointer-events-none tw:opacity-0 tw:group-data-[state=expanded]:opacity-100'>
-                Nodewave
+                TODO App
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

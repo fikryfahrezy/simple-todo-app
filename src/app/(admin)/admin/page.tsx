@@ -29,7 +29,7 @@ import {
 import { useSession } from "@/hooks/use-session";
 import { range } from "@/lib/array";
 import { useGetAllTodos } from "@/queries/todo-query";
-import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
+import type { TodoServiceAuthzResponseBody } from "@/services/todo-service.types";
 
 const AVAILABLE_STATUSES = [
   { label: "Done", value: "true" },
@@ -41,7 +41,7 @@ const SEARCH_PARAM_NAME = "search";
 const STATUS_PARAM_NAME = "status";
 
 export default function AdminPage() {
-  const session = useSession<NodewaveServiceAuthzResponseBody>();
+  const session = useSession<TodoServiceAuthzResponseBody>();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();

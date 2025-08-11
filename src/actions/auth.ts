@@ -10,9 +10,9 @@ import {
   RegisterFormSchema,
   type RegisterFormState,
 } from "@/schemas/register-form-schema";
-import { login, register, verifyToken } from "@/services/nodewave-service";
+import { login, register, verifyToken } from "@/services/todo-service";
 
-const EMAIL_DOMAIN = process.env.NEXT_PUBLIC_NODEWAVE_EMAIL_DOMAIN;
+const EMAIL_DOMAIN = process.env.NEXT_PUBLIC_EMAIL_DOMAIN;
 
 export async function registerAction(
   _: RegisterFormState,

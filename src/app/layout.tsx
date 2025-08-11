@@ -11,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Nodewave Front End Test",
-  description: "Test for Nodewave's Front End Engineer position",
+  title: "Simple TODO App",
+  description: "Yet another TODO App",
 };
 
 export default function RootLayout({

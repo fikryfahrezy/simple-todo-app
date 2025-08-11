@@ -19,9 +19,9 @@ import {
   useMarkTodo,
 } from "@/queries/todo-query";
 import type {
-  NodewaveServiceAuthzResponseBody,
-  NodewaveServiceTodo,
-} from "@/services/nodewave-service.types";
+  TodoServiceAuthzResponseBody,
+  TodoServiceTodo,
+} from "@/services/todo-service.types";
 
 type TodoState = {
   item: string;
@@ -64,11 +64,11 @@ const useTodoStore = create<TodoState>()((set) => {
 });
 
 type TodoItemProps = {
-  todoItem: NodewaveServiceTodo;
+  todoItem: TodoServiceTodo;
 };
 
 const TodoItem = ({ todoItem }: TodoItemProps) => {
-  const session = useSession<NodewaveServiceAuthzResponseBody>();
+  const session = useSession<TodoServiceAuthzResponseBody>();
   const markTodo = useMarkTodo();
 
   const checkedTodoIds = useTodoStore((state) => {
@@ -150,7 +150,7 @@ const TodoItem = ({ todoItem }: TodoItemProps) => {
 };
 
 export default function UserPage() {
-  const session = useSession<NodewaveServiceAuthzResponseBody>();
+  const session = useSession<TodoServiceAuthzResponseBody>();
 
   const createNewTodo = useCreateNewTodo();
   const deleteTodo = useDeleteTodo();

@@ -1,6 +1,6 @@
-# nodewave-front-end
+# Simple TODO App
 
-Working web: https://nw-fe-test.vercel.app
+Working web: https://simple-todo.fahrezy.work
 
 ## Start Development
 
@@ -18,8 +18,8 @@ cp .env.example .env
 
 Update the environment variable with the actual value.
 
-- `NEXT_PUBLIC_NODEWAVE_SERVICE_API_URL` is the URL of the Nodewave service used by the web
-- `NEXT_PUBLIC_NODEWAVE_EMAIL_DOMAIN` is the email domain used for the new user in the registration form; the example value is **@domain.com**
+- `NEXT_PUBLIC_SERVICE_API_URL` is the URL of the service used by the web
+- `NEXT_PUBLIC_EMAIL_DOMAIN` is the email domain used for the new user in the registration form; the example value is **@domain.com**
 
 ### Run development
 

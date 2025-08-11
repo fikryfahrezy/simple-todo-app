@@ -14,33 +14,33 @@ import {
   getAllTodos,
   markTodo,
   RequestError,
-} from "@/services/nodewave-service";
+} from "@/services/todo-service";
 import type {
-  NodewaveServiceAllTodosParams,
-  NodewaveServiceAllTodosRequest,
-  NodewaveServiceAllTodosResponse,
-  NodewaveServiceCreateTodoRequest,
-  NodewaveServiceCreateTodoResponse,
-  NodewaveServiceDeleteTodoRequest,
-  NodewaveServiceDeleteTodoResponse,
-  NodewaveServiceMarkTodoRequest,
-  NodewaveServiceMarkTodoResponse,
-} from "@/services/nodewave-service.types";
+  TodoServiceAllTodosParams,
+  TodoServiceAllTodosRequest,
+  TodoServiceAllTodosResponse,
+  TodoServiceCreateTodoRequest,
+  TodoServiceCreateTodoResponse,
+  TodoServiceDeleteTodoRequest,
+  TodoServiceDeleteTodoResponse,
+  TodoServiceMarkTodoRequest,
+  TodoServiceMarkTodoResponse,
+} from "@/services/todo-service.types";
 
 export const todoKeys = {
   all: ["todos"],
   lists: () => {
     return [...todoKeys.all, "lists"] as const;
   },
-  list: (queryParams: NodewaveServiceAllTodosParams) => {
+  list: (queryParams: TodoServiceAllTodosParams) => {
     return [...todoKeys.lists(), queryParams] as const;
   },
 };
 
 export function useGetAllTodos(
-  params: NodewaveServiceAllTodosRequest,
+  params: TodoServiceAllTodosRequest,
   options?: Omit<
-    UseQueryOptions<NodewaveServiceAllTodosResponse, RequestError>,
+    UseQueryOptions<TodoServiceAllTodosResponse, RequestError>,
     "queryKey" | "queryFn"
   >,
 ) {
@@ -60,12 +60,12 @@ export function useGetAllTodos(
 }
 
 export function useInfiniteGetAllTodos(
-  params: NodewaveServiceAllTodosRequest,
+  params: TodoServiceAllTodosRequest,
   options?: Omit<
     UseInfiniteQueryOptions<
-      NodewaveServiceAllTodosResponse,
+      TodoServiceAllTodosResponse,
       RequestError,
-      InfiniteData<NodewaveServiceAllTodosResponse, unknown>,
+      InfiniteData<TodoServiceAllTodosResponse, unknown>,
       readonly unknown[],
       number
     >,
@@ -104,9 +104,9 @@ export function useInfiniteGetAllTodos(
 export function useCreateNewTodo(
   options?: Omit<
     MutationOptions<
-      NodewaveServiceCreateTodoResponse,
+      TodoServiceCreateTodoResponse,
       RequestError,
-      NodewaveServiceCreateTodoRequest
+      TodoServiceCreateTodoRequest
     >,
     "mutationFn"
   >,
@@ -135,9 +135,9 @@ export function useCreateNewTodo(
 export function useMarkTodo(
   options?: Omit<
     MutationOptions<
-      NodewaveServiceMarkTodoResponse,
+      TodoServiceMarkTodoResponse,
       RequestError,
-      NodewaveServiceMarkTodoRequest
+      TodoServiceMarkTodoRequest
     >,
     "mutationFn"
   >,
@@ -166,9 +166,9 @@ export function useMarkTodo(
 export function useDeleteTodo(
   options?: Omit<
     MutationOptions<
-      NodewaveServiceDeleteTodoResponse,
+      TodoServiceDeleteTodoResponse,
       RequestError,
-      NodewaveServiceDeleteTodoRequest
+      TodoServiceDeleteTodoRequest
     >,
     "mutationFn"
   >,

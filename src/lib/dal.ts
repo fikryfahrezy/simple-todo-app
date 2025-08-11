@@ -1,12 +1,12 @@
 import "server-only";
 
 import { cache } from "react";
-import { verifyToken } from "@/services/nodewave-service";
-import type { NodewaveServiceAuthzResponseBody } from "@/services/nodewave-service.types";
+import { verifyToken } from "@/services/todo-service";
+import type { TodoServiceAuthzResponseBody } from "@/services/todo-service.types";
 import { getSession } from "./session";
 
 export const verifySession = cache(async () => {
-  const value = (await getSession()) as NodewaveServiceAuthzResponseBody;
+  const value = (await getSession()) as TodoServiceAuthzResponseBody;
   if (!value) {
     return null;
   }

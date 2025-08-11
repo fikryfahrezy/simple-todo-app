@@ -26,7 +26,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import type { RegisterFormState } from "@/schemas/register-form-schema";
 
-const EMAIL_DOMAIN = process.env.NEXT_PUBLIC_NODEWAVE_EMAIL_DOMAIN;
+const EMAIL_DOMAIN = process.env.NEXT_PUBLIC_EMAIL_DOMAIN;
 
 export default function RegisterPage() {
   const [state, action, pending] = useActionState<RegisterFormState, FormData>(
